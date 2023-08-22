@@ -5,7 +5,7 @@ const fs = require('fs');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const glob = require('glob');
 
-const getPlugins = (pluginsWhitelist) => {
+const getPlugins = (pluginsAllowlist) => {
   const rootPath = resolve(__dirname, '..', join('..', '..', '..', 'packages'));
   /**
    * So `glob` only supports '/' as a path separator, so we need to replace
