@@ -5,16 +5,20 @@ import get from 'lodash/get';
 
 import { getOtherInfos, getType } from './getAttributeInfos';
 
-const formatContentTypeData = (data, ct, composSchema) => {
-  const recursiveFormatData = (data, schema) => {
-    return Object.keys(data).reduce((acc, current) => {
+const formatContentTypeData = (
+  data: object,
+  ct: object,
+  composSchema: object
+): Record<string, string | number> => {
+  const recursiveFormatData = <T>(data: T, schema: object) => {
+    return Object.keys(data).reduce((acc: object, current: string) => {
       const type = getType(schema, current);
       const value = get(data, current);
       const compoUid = getOtherInfos(schema, [current, 'component']);
       const isRepeatable = getOtherInfos(schema, [current, 'repeatable']);
 
       if (type === 'json' && value !== undefined) {
-        acc[current] = JSON.stringify(value, null, 2);
+        acc[current as keyof T] = JSON.stringify(value, null, 2);
 
         return acc;
       }
